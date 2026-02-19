@@ -17,8 +17,15 @@ func (c *client) Context() context.Context {
 }
 
 // New creates a new HTTP client instance.
-func New(ctx context.Context) *client {
-	return &client{ctx: ctx, client: &http.Client{}}
+func New(
+	ctx context.Context,
+	clientConfig ...http.Client,
+) *client {
+	cl := &http.Client{}
+	if len(clientConfig) > 0 {
+		cl = &clientConfig[0]
+	}
+	return &client{ctx: ctx, client: cl}
 }
 
 // Get sends an HTTP GET request to the specified URL with the given options.

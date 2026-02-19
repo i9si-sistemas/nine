@@ -26,6 +26,6 @@ type Client interface {
 }
 
 // New instantiates a new HTTP client with the provided context.
-func New(ctx context.Context) Client {
-	return client.New(ctx)
+func New(ctx context.Context, clientConfig ...http.Client) Client {
+	return client.New(ctx, clientConfig...)
 }
